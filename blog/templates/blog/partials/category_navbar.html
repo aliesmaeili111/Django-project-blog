@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <div class="collapse navbar-collapse nav" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto py-4 py-lg-0">
+            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:home' %}">خانه</a></li>
+            {% for cat in category %}
+                {% if cat.parent == None %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>
+                    {% if cat.children.active %}
+                        {% include 'blog/partials/category_loop.html' %}
+                    {% endif %}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
