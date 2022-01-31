@@ -66,9 +66,7 @@ class Article(models.Model):
     jpublish.short_description = "زمان انتشار"
     
     
-    def category_publish(self):
-        return self.category.filter(status=True)
-    
+
     
     def thumbnail_tag(self):
         return format_html("<img  style='border-radius:6px ' width=95 height = 70 src = '{}'>".format(self.thumbnail.url))

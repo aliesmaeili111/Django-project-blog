@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+{% block main %}
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('{% static "blog/assets/img/home-bg.jpg" %}')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Blog</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+   
+    <!-- Main Content-->
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% block header %}
+                
+                {% endblock %}
+                {% for article in object_list %}
+                       <!-- Post preview-->
+                       <div class="post-preview">
+                        <a href="{% url 'blog:detail' article.slug %}">
+                            <h2 class="post-title">{{article.title}}</h2>
+                            <h3 class="post-subtitle">{{article.descriptions|truncatewords:25}}</h3>
+                        </a>
+                        <p class="post-meta">
+                            Post by:
+                            <a href="#!">ali</a> <br>
+                            {{article.jpublish}}
+                        </p>
+                        <div>
+                            {% for cat in article.category.active %}
+                                <a href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>                                
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    
+                {% endfor %}
+               <!-- Pager-->
+               {% if is_paginated %}
+                    <div class="d-flex justify-content-start mb-4"> 
+                        {% if page_obj.has_previous %}
+                            <a class="btn btn-primary text-uppercase m-2" href="{% block previous_page_url %} {% endblock%}">پست های جدید &larr;  </a>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <a class="btn btn-primary text-uppercase m-2" href="{% block next_page_url %} {% endblock%}">پست های قدیمی &rarr;  </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body>
+</html>
