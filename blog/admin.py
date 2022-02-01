@@ -8,7 +8,7 @@ admin.site.site_header = "وبلاگ"
 # end delete post
 #actions for admin site published 
 def make_published(modeladmin,request,queryset):
-    rows_updated = queryset.update(status='p')
+    rows_updated = queryset.update(status='p') # author = 1 means ali to all
     if rows_updated == 1 :
         message_bit = "منتشر شد"
     else:
@@ -48,8 +48,8 @@ make_category_true.short_description = "  نمایش دادن دسته بندی 
 
 # Custom admin for model article
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('title','thumbnail_tag','slug','jpublish','status','category_to_str')
-    list_filter = ('publish','status') 
+    list_display = ('title','thumbnail_tag','author','slug','jpublish','status','category_to_str')
+    list_filter = ('publish','status','author') 
     search_fields = ('title','descriptions')
     prepopulated_fields = {'slug':('title',)}
     ordering = ['-status','-publish']
