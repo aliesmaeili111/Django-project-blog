@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from extensions.utils import jalali_conveter
@@ -65,15 +66,24 @@ class Article(models.Model):
         return self.title
     
     
+    def get_absolute_url(self):
+        return  reverse("account:home")
+    
     def jpublish(self):
         return jalali_conveter(self.publish)
     jpublish.short_description = "زمان انتشار"
     
     
-
-    
     def thumbnail_tag(self):
         return format_html("<img  style='border-radius:6px ' width=95 height = 70 src = '{}'>".format(self.thumbnail.url))
     
     thumbnail_tag.short_description =" عکس"
+    
+    def category_to_str(self):
+        return ' , '.join([category.title for category in self.category.active()])
+    
+    category_to_str.short_description ="دسته بندی"
+    
+    
+    
     objects = ArticleManager()
