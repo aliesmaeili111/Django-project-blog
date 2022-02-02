@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from . models import Article,Category
 from django.core.paginator import Paginator
 from django.views.generic import ListView,DetailView
-from django.contrib.auth.models import User
+from account.models import User
 
 # Create your views here.
 

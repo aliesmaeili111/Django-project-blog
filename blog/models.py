@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from extensions.utils import jalali_conveter
-from django.contrib.auth.models import User
+from account.models import User
 # Create your models here.
 
 

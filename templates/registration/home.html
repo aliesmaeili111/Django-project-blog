@@ -1,8 +1,8 @@
 {% extends 'registration/base.html' %}
 
-{% block title %}
+{% block title %}{% block title-meta %}
 لیست مقالات
-{% endblock %}
+{% endblock %}{% endblock %}
 
 {% block main %}
 
@@ -32,10 +32,8 @@
                         <td><img src="{{article.thumbnail.url}}" alt="picture" width="100px"></td>
                         <td>{{article.category_to_str}}</td>
                         <td>{{article.author.get_full_name}}</td>
-                        <td>{{article.descriptions|truncatewords:"10"}}</td>
-
+                        <td>{{article.descriptions|striptags|truncatewords:"10"}}</td>
                         <td>{{article.jpublish}}</td>
-
                         <td>
                             {% if article.status == "p" %}
                                 <span class="badge badge-success">منتشر شده</span>
