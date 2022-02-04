@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="{% url link  %}"
+    class="nav-link {% if request.resolver_match.url_name == link_name %} active {% endif %}">
+        <i class="fa {{classes}} nav-icon"></i>
+        <p> {{content}}</p>
+    </a>
+</body>
+</html>
