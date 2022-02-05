@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Blog {% block title %}
+    <title> بلاگ {% block title %}
             | {{object.title}}
         {% endblock %}
     </title>
@@ -23,6 +23,9 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
                         <h1> {{object.title}}</h1>
+                        {% if article.is_special %}
+                            <span class="badge badge-danger" style = "font-size:15px">ویژه</span>  
+                        {% endif %}
                         <time>
                             {{object.jpublish}}
                         </time>
@@ -41,7 +44,8 @@
                             {% if user.is_authenticated and user.is_special_user or user ==  object.author or user.is_superuser %}
                                 {{object.descriptions|safe}}
                             {% else  %}
-                                    <p class="">این مقاله ویژه است و برای مشاهده آن باید <a href="#">اشتراک ویژه</a>تهیه بکنید.</p>
+                                {{article.descriptions|striptags|truncatewords:25}}
+                                <p class="alert alert-warning">این مقاله ویژه است و برای مشاهده آن باید <a href="#" class="alert-link">اشتراک ویژه</a>تهیه بکنید.</p>
                             {% endif %}
                         {% else  %}
                             {{object.descriptions|safe}}
