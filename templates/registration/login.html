@@ -73,6 +73,7 @@
 							<i class="zmdi zmdi-eye"></i>
 						</span>
 						{{form.password|add_class:"input100"}}
+						<span class="focus-input100" data-placeholder="رمز عبور"></span>
 						{% if form.password_errors %}
 							<div class="errors">
 								{% for error in form.password_errors %}
@@ -80,8 +81,12 @@
 								{% endfor %}
 							</div>
 						{% endif %}
-						<span class="focus-input100" data-placeholder="رمز عبور"></span>
 					</div>
+
+					<a href="{% url 'password_reset' %}"  class='myfont'>
+						فراموشی رمز عبور
+
+					</a>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
