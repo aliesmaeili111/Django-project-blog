@@ -1,5 +1,6 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load comment_tags %}  {# Loading the template tag #}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +30,6 @@
                         <time>
                             {{object.jpublish}}
                         </time>
-
                     </div>
                 </div>
             </div>
@@ -49,8 +49,11 @@
                             {% endif %}
                         {% else  %}
                             {{object.descriptions|safe}}
-                            
                         {% endif %}
+
+                        {% render_comments object request %}
+                        {% include_bootstrap %}
+                        
                     </div>
                 </div>
             </div>
