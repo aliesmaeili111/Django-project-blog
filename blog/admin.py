@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . models import Article,Category
+from . models import Article,Category,IpAddress
+
 # Register your models here.
 
 admin.site.site_header = "وبلاگ"
@@ -68,3 +69,4 @@ class CategoryAdmin(admin.ModelAdmin):
     actions = [make_category_false,make_category_true]
 
 admin.site.register(Category,CategoryAdmin)
+admin.site.register(IpAddress)

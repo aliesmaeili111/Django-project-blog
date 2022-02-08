@@ -1,6 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 {% load comment_tags %}  {# Loading the template tag #}
+{% load ratings %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,14 @@
                         <time>
                             {{object.jpublish}}
                         </time>
+                        <div>
+                            {% ratings object %}
+                        </div>
+                        <div>
+                            <h6> بازدیدها:
+                                {{object.hits.count}}
+                            </h6>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,7 +54,7 @@
                                 {{object.descriptions|safe}}
                             {% else  %}
                                 {{article.descriptions|striptags|truncatewords:25}}
-                                <p class="alert alert-warning">این مقاله ویژه است و برای مشاهده آن باید <a href="#" class="alert-link">اشتراک ویژه</a>تهیه بکنید.</p>
+                                <p class="alert alert-warning">این مقاله ویژه است و برای مشاهده آن باید <a href="#" class="badge bg-white text text-primary"> اشتراک ویژه </a>تهیه بکنید.</p>
                             {% endif %}
                         {% else  %}
                             {{object.descriptions|safe}}

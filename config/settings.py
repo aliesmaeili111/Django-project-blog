@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_gravatar',
     'comment',
+    'star_ratings'
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog.middleware.SaveIpMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -155,3 +157,9 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 EMAIL_PORT = config('EMAIL_PORT')
+
+#star ratings app
+STAR_RATINGS_STAR_HEIGHT = 18
+# STAR_RATINGS_RERATE = False
+# STAR_RATINGS_ANONYMOUS = True
+# STAR_RATINGS_STAR_SPRITE
