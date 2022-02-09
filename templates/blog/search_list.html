@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category list</title>
+    <title>Search article </title>
 </head>
 <body>
     {% block header %}
-        <h3 class="alert alert-primary text-center">دسته بندی:{{category.title}}</h3>
+        <h3 class="alert alert-danger text-center"> جستجو:{{search}}</h3>
     {% endblock %}
 
     {% block previous_page_url %} 
-        {% url 'blog:category' category.slug page_obj.previous_page_number %}
+        {% url 'blog:search' page_obj.previous_page_number %}?q={{search}}
     {% endblock%}
 
     {% block next_page_url %}
-        {% url 'blog:category' category.slug page_obj.next_page_number %}
+        {% url 'blog:search' page_obj.next_page_number %}?q={{search}}
     {% endblock%}
     
 </body>

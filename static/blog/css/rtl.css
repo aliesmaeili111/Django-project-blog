@@ -75,12 +75,13 @@ header.masthead.site.heading h1{
     
 }
 .nav ul li{
+    
     border-bottom: none;
     height: 45px;
     line-height: 46px;
     font-size:18px;
     display: inline-block;
-    float: left;
+    
     margin: auto;
 }
 
@@ -126,4 +127,19 @@ header.masthead.site.heading h1{
 
 .nav ul >li>ul>li>ul>li:hover>ul{
     display: block !important;
+}
+
+.aside{
+    width: 245px;
+    position: absolute;
+    left: -240px;
+    top: 0;
+}
+.popular_articles {
+
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: -4px 5px #d5d5d5;
+    border: 1px solid #bfbfbf;
 }

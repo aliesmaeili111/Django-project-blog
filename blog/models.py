@@ -65,7 +65,7 @@ class Article(models.Model):
     is_special = models.BooleanField(default=False,verbose_name=' مقاله ویژه')
     status = models.CharField(max_length=1,choices=STATUS_CHOICES,verbose_name="وضعیت")
     comments = GenericRelation(Comment)
-    hits = models.ManyToManyField(IpAddress,blank=True,related_name='hits',verbose_name='بازدیدها')
+    hits = models.ManyToManyField(IpAddress,through='ArticleHit',blank=True,related_name='hits',verbose_name='بازدیدها')
     
     class Meta :
         verbose_name = "مقاله"
@@ -91,10 +91,16 @@ class Article(models.Model):
     thumbnail_tag.short_description =" عکس"
     
     def category_to_str(self):
-        return ' , '.join([category.title for category in self.category.active()])
+        return ', '.join([category.title for category in self.category.active()])
     
     category_to_str.short_description ="دسته بندی"
     
     
     
     objects = ArticleManager()
+    
+# view app in month
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+    ip_address = models.ForeignKey(IpAddress,on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True,null=True)

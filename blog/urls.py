@@ -5,7 +5,8 @@ from . views import (ArticleList,
                     ArticleDetail,
                     CategoryList,
                     AuthorList,
-                    ArticlePreview)
+                    ArticlePreview,
+                    SearchList)
 
 app_name = 'blog'
 
@@ -19,5 +20,8 @@ urlpatterns = [
     
     path('author/<slug:username>',AuthorList.as_view(),name = 'author'),
     path('author/<slug:username>/page/<int:page>',AuthorList.as_view(),name = 'author'),
+    # start search url
+    path('search/',SearchList.as_view(),name = 'search'),
+    path('author/page/<int:page>',SearchList.as_view(),name = 'search'),
     
 ]

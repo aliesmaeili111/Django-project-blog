@@ -2,6 +2,8 @@
 {% load static %}
 {% load comment_tags %}  {# Loading the template tag #}
 {% load ratings %}
+{% load base_tags %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +25,14 @@
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
+                    
                     <div class="site-heading">
                         <h1> {{object.title}}</h1>
                         {% if article.is_special %}
                             <span class="badge badge-danger" style = "font-size:15px">ویژه</span>  
                         {% endif %}
                         <time>
-                            {{object.jpublish}}
+                            {{object.publish|naturaltime}}
                         </time>
                         <div>
                             {% ratings object %}
@@ -49,6 +52,10 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7 text-justify">
+                        <aside class="aside">
+                            {% popular_articles %}
+                            {% hot_articles %}
+                        </aside>
                         {% if object.is_special %}
                             {% if user.is_authenticated and user.is_special_user or user ==  object.author or user.is_superuser %}
                                 {{object.descriptions|safe}}

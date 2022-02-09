@@ -16,7 +16,7 @@ Including another URLconf
 
 from django import views
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path,include,re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from account.views import Login,Register,activate
@@ -27,7 +27,7 @@ urlpatterns = [
     path('register/', Register.as_view(), name='register'),
     path('comment/', include('comment.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    path(r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",activate, name='activate'),        
+    re_path(r"^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$",activate, name='activate'),        
     path('', include('blog.urls')),
     path('', include('django.contrib.auth.urls')),
     path('account/', include('account.urls')),

@@ -1,6 +1,9 @@
 {% extends 'blog/base.html' %}
+
 {% load static %} 
 {% load ratings %}
+{% load base_tags %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> بلاگ</title>
+    <link href="{% static 'blog/css/rtl.css' %}" rel="stylesheet" />
 </head>
 <body>
 {% block main %}
@@ -28,16 +32,21 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
+                <aside class="aside">
+                    {% popular_articles %}
+                    {% hot_articles %}
+                </aside>
                 {% block header %}
                 
                 {% endblock %}
                 {% for article in object_list %}
                        <!-- Post preview-->
                        <div class="post-preview">
+                        
                         <a href="{% url 'blog:detail' article.slug %}">
                             <h2 class="post-title">{{article.title}}
                             {% if article.is_special %}
-                                <i class=" badge bg-danger mx-2 px-1" style="font-size:15px">ویژه</i>  
+                                <i class="badge bg-danger mx-2 px-1" style="font-size:15px">ویژه</i>  
                             {% endif %}
                             </h2>
                             <h3 class="post-subtitle">{{article.descriptions|striptags|truncatewords:25}}</h3>
@@ -47,26 +56,27 @@
                             <a href="{% url 'blog:author' article.author %}">
                                     {{article.author.get_full_name}}
                             </a><br>
-                                {{article.jpublish}}
+                                {{article.publish|naturaltime}}
                         </p>
-                        <div>
-                            {% ratings article %}
+                            <div>
+                                {% ratings article %}
+                            </div>
+                            <div>
+                                {% for cat in article.category.active %}
+                                    <a href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>                                
+                                {% endfor %}
+                            </div>
+                            <div>
+                                <h6>
+                                    بازدیدها:
+                                    {{article.hits.count}}
+                                </h6>
+                            </div>
                         </div>
-                        <div>
-                            {% for cat in article.category.active %}
-                                <a href="{% url 'blog:category' cat.slug %}">{{cat.title}}</a>                                
-                            {% endfor %}
-                        </div>
-                        <div>
-                            <h6>
-                                بازدیدها:
-                                {{article.hits.count}}
-                            </h6>
-                    </div>
-                    </div>
                     <!-- Divider-->
                     <hr class="my-4" />
-                    
+                {% empty %}
+                        <p>متاسفانه محتوایی برای نمایش وجود ندارد.</p>
                 {% endfor %}
                <!-- Pager-->
                {% if is_paginated %}

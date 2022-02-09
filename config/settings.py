@@ -52,7 +52,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'django_gravatar',
     'comment',
-    'star_ratings'
+    'star_ratings',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -147,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-CRISPY_TEMPLATE_PACK ="bootstrap4"
+CRISPY_TEMPLATE_PACK ="bootstrap5"
 
 AUTH_USER_MODEL = 'account.User'
 

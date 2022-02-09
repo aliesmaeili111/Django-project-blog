@@ -1,10 +1,11 @@
-from ipaddress import ip_address
+
 from django.shortcuts import render,get_object_or_404
 from . models import Article,Category
 from django.core.paginator import Paginator
 from django.views.generic import ListView,DetailView
 from account.models import User
 from account.mixins import AuthorAccessMixin
+from django.db.models import Q
 
 # Create your views here.
 
@@ -26,7 +27,7 @@ class ArticleList(ListView):
     # context_objects_name ='articles'
     queryset = Article.objects.published()
     paginate_by = 4
-   
+    
 # detail view
 # def detail(request,slug):
 #     context = {
@@ -80,12 +81,10 @@ class CategoryList(ListView):
         return context
     
     
-class AuthorList(ListView):
-    
+class AuthorList(ListView):    
     templated_name = "blog/author_list.html"
     paginate_by = 4
-    
-    
+
     def get_queryset(self):
         global author
         username = self.kwargs.get('username')
@@ -95,4 +94,19 @@ class AuthorList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = author
+        return context
+    
+
+
+class SearchList(ListView):    
+    templated_name = "blog/search_list.html"
+    paginate_by = 4
+
+    def get_queryset(self):
+        search = self.request.GET.get('q')
+        return Article.objects.filter(Q(descriptions__icontains = search)| Q(title__icontains = search))
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('q')
         return context
