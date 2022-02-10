@@ -33,7 +33,7 @@
 </head>
 <body>
 	
-	<div class="limiter">
+	<div class="limiter" >
 		{% if form.non_field_errors %}
 			<div class="errors">
 				{% for error in form.non_field_errors %}
@@ -44,7 +44,7 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-		<div class="container-login100" style="background-color: rgb(163, 45, 200);">
+		<div class="container-login100" style="background-image: url('{% static "blog/assets/img/home-bg.jpg" %}');background-size: cover;">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="POST">
 					{% csrf_token %}

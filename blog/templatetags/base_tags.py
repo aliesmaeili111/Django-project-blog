@@ -9,7 +9,8 @@ register = template.Library()
 
 @register.simple_tag
 def title():
-    return "وبلاگ علی"
+
+    return "ورود"
 
 
 

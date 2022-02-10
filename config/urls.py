@@ -17,12 +17,10 @@ Including another URLconf
 from django import views
 from django.contrib import admin
 from django.urls import path,include,re_path
-from django.conf import settings
-from django.conf.urls.static import static
 from account.views import Login,Register,activate
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('login/', Login.as_view(), name='login'),
     path('register/', Register.as_view(), name='register'),
     path('comment/', include('comment.urls')),
@@ -33,5 +31,4 @@ urlpatterns = [
     path('account/', include('account.urls')),
 ]
 
-urlpatterns += static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
 
